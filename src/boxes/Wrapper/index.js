@@ -11,7 +11,7 @@ moment.locale('zh-cn', {
         doy: 4 // The week that contains Jan 4th is the first week of the year.
     }
 });
-require('styles/common/index.css');
+import 'styles/common/index.css';
 
 class Wrapper extends PureComponent {
     static propTypes = {
