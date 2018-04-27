@@ -31,6 +31,9 @@ module.exports = {
                 }
             }]
         }, {
+            test: /node_modules\/.+\.css$/,
+            use: ['style-loader', 'css-loader']
+        }, {
             test: /\.js$/,
             exclude: /node_modules/,
             use: ['babel-loader', 'eslint-loader']
