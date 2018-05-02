@@ -55,7 +55,7 @@ Request.prototype = {
 		});
 	},
 	addAuthInfo: async function() {
-		let userInfo = await user.get();
+		let userInfo = user.get();
 		let token = null;
 		if (userInfo) {
 			token = userInfo.token;

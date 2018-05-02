@@ -2,7 +2,7 @@ let currentUser = null; //在内存中同步user
 
 let user = {
     //有k返回响应字段，没有返回整个user对象
-    get: async function(k) {
+    get: function(k) {
         if (currentUser) {
             let user = currentUser;
             if (k) {
@@ -24,8 +24,8 @@ let user = {
         }
     },
     //可以用key, value的形式或对象的形式赋值
-    set: async function(k, v) {
-        var user = await this.get();
+    set: function(k, v) {
+        var user = this.get();
         if (!user) {
             user = {};
         }
@@ -40,7 +40,7 @@ let user = {
         currentUser = user;
         return user;
     },
-    clear: async function() {
+    clear: function() {
         localStorage.removeItem('remiUser');
         currentUser = null;
     }
