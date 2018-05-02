@@ -6,6 +6,7 @@ var dashboard = new Dashboard();
 
 var environment = process.env.NODE_ENV || 'development';
 var srcPath = path.resolve(__dirname, '../src');
+var theme = require('./theme');
 
 module.exports = {
     devtool: 'eval',
@@ -36,6 +37,15 @@ module.exports = {
         }, {
             test: /node_modules\/.+\.css$/,
             use: ['style-loader', 'css-loader']
+        }, {
+            test: /\.less$/,
+            use: ['style-loader', 'css-loader', {
+                loader: 'less-loader',
+                options: {
+                    modifyVars: theme,
+                    javascriptEnabled: true,
+                }
+            }]
         }, {
             test: /\.js$/,
             exclude: /node_modules/,

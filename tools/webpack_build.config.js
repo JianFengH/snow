@@ -3,6 +3,7 @@ var webpack = require('webpack');
 
 var environment = process.env.NODE_ENV || 'production';
 var srcPath = path.resolve(__dirname, '../src');
+var theme = require('./theme');
 
 module.exports = {
     devtool: 'sourcemap',
@@ -34,6 +35,15 @@ module.exports = {
             test: /node_modules\/.+\.css$/,
             use: ['style-loader', 'css-loader']
         }, {
+            test: /\.less$/,
+            use: ['style-loader', 'css-loader', {
+                loader: 'less-loader',
+                options: {
+                    modifyVars: theme,
+                    javascriptEnabled: true,
+                }
+            }]
+        }, {
             test: /\.js$/,
             exclude: /node_modules/,
             use: ['babel-loader', 'eslint-loader']
@@ -52,15 +62,6 @@ module.exports = {
             '__ENV__': JSON.stringify(environment),
             'process.env.NODE_ENV': JSON.stringify(environment)
         }),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     },
-        //     sourceMap: false
-        // }),
-        //
-        // new webpack.optimize.OccurenceOrderPlugin(),
-        // new webpack.optimize.AggressiveMergingPlugin(),
         new webpack.ProgressPlugin(function(percentage, msg) {
             var v = Math.round(percentage * 100);
             console.log('进度: ' + v + '%; ' + msg);
