@@ -1,1 +1,1 @@
-this is template
+This is a project template for type of the pc.
