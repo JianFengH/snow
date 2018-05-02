@@ -5,10 +5,6 @@ var fs = require('fs');
 
 main();
 function main(){
-	// exec('rm -rf ./dist/*', function(err){
-	// 	if(err) throw err;
-	// 	compile();
-	// });
 	compile();
 }
 
@@ -33,7 +29,6 @@ function successfullyCompiled(jsonStats){
 	var assetsByChunkName = jsonStats.assetsByChunkName;
 	// console.log(assetsByChunkName);
 
-	// exec('mkdir -p ./dist/pages/ && cp -rf ./src/pages/* ./dist/pages/ && cp -rf ./src/index.html ./dist/', function(err, stdout, stderr){
 	exec('cp -rf ./src/index.html ./dist/', function(err, stdout, stderr){
 		if(err) throw err;
 		changeFileName(assetsByChunkName);
@@ -41,23 +36,15 @@ function successfullyCompiled(jsonStats){
 }
 
 function changeFileName(assetsByChunkName){
-	var targetFile = ['./dist/index.html'],
-		targetFile2 = [];
+	var targetFile = ['./dist/index.html'];
 
-	var entry = assetsByChunkName.entry,
-		entry2 = assetsByChunkName.entry2;
+	var entry = assetsByChunkName.entry;
 
-	var RE_ENTRY = /dist\/entry\.bundle\.js/,
-		RE_ENTRY2 = /dist\/entry2\.bundle\.js/;
+	var RE_ENTRY = /dist\/entry\.bundle\.js/;
 
 	for(var i=0, len=targetFile.length; i<len; i++){
 		var fileName = targetFile[i];
 		reWrite(fileName, entry, RE_ENTRY);
-	}
-
-	for(var i=0, len=targetFile2.length; i<len; i++){
-		var fileName = targetFile2[i];
-		reWrite(fileName, entry2, RE_ENTRY2);
 	}
 
 	function reWrite(fileName, entry, re){

@@ -22,12 +22,6 @@ var server = new WebpackDevServer(compile, {
             secure: false,
             bypass: function(req, res, proxyOptions) {
                 var url = req.url;
-                if (/src\/pages\/.+/.test(url)) {
-                    return url;
-                }
-                if (/pages\/.+/.test(url)) {
-                    return url.replace('pages/', 'src/pages/');
-                }
                 if (/\/dist\//.test(url)) {
                     return url;
                 }
