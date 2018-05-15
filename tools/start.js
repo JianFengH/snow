@@ -12,7 +12,7 @@ var server = new WebpackDevServer(compile, {
     publicPath: config.output.publicPath,
     hot: true,
     inline: true,
-    quiet: true,
+    quiet: false,
     historyApiFallback: true,
     stats: {
         colors: true

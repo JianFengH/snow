@@ -5,7 +5,7 @@ var srcPath = path.resolve(__dirname, '../src');
 var theme = require('./theme');
 
 module.exports = {
-    devtool: 'sourcemap',
+    devtool: 'hidden-source-map',
     mode: 'production',
 
     entry: {

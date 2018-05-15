@@ -1,14 +1,13 @@
 var path = require('path');
 var webpack = require('webpack');
-var Dashboard = require('webpack-dashboard');
-var DashboardPlugin = require('webpack-dashboard/plugin');
-var dashboard = new Dashboard();
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// var DashboardPlugin = require('webpack-dashboard/plugin');
 
 var srcPath = path.resolve(__dirname, '../src');
 var theme = require('./theme');
 
 module.exports = {
-    devtool: 'eval',
+    devtool: 'source-map',
     mode: 'development',
 
     entry: {
@@ -59,9 +58,10 @@ module.exports = {
         }]
     },
     plugins: [
-        new DashboardPlugin(dashboard.setData),
+        // new DashboardPlugin(),
         new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(zh-cn)$/),
         new webpack.HotModuleReplacementPlugin(),
+        new BundleAnalyzerPlugin(),
     ],
     resolve: {
         extensions: ['.js', '.jsx'],

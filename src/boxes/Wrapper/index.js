@@ -11,8 +11,23 @@ moment.updateLocale('zh-cn', {
         doy: 4 // The week that contains Jan 4th is the first week of the year.
     }
 });
-// import 'styles/common/index.css';
+import 'styles/common/index.css';
 import 'antd/dist/antd.less';
+
+import {Route, Switch, Redirect, Link} from 'react-router-dom';
+import Loadable from 'react-loadable';
+
+function Loading(){
+    return '...loading';
+}
+
+const Profile = Loadable({
+    loader: () => import('boxes/Profile'),
+    loading: Loading,
+});
+
+import Main from 'boxes/Main';
+// import Profile from 'boxes/Profile';
 
 class Wrapper extends PureComponent {
     static propTypes = {
@@ -32,8 +47,14 @@ class Wrapper extends PureComponent {
         this._isMounted = false;
     }
     render() {
-        return <div className={style.box}>
-        	this is wrapper
+        return <div>
+            <Link to='/main'>主页</Link> |
+            <Link to='/profile'>个人主页</Link>
+            <Switch>
+                <Route exact path='/' component={Main}/>
+                <Route path='/main' component={Main}/>
+                <Route path='/profile' component={Profile}/>
+            </Switch>
         </div>
     }
 }
