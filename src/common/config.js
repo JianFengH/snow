@@ -17,4 +17,4 @@ var Config = {
     },
 };
 
-module.exports = Config[__ENV__];
+module.exports = Config[process.env.NODE_ENV];

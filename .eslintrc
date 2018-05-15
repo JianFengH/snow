@@ -18,8 +18,7 @@
     "mocha": true
   },
   "globals": {
-    "wx": true,
-    "__ENV__": true
+    "wx": true
   },
   "rules": {
     "comma-dangle": 0,

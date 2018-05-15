@@ -4,7 +4,6 @@ var Dashboard = require('webpack-dashboard');
 var DashboardPlugin = require('webpack-dashboard/plugin');
 var dashboard = new Dashboard();
 
-var environment = process.env.NODE_ENV || 'development';
 var srcPath = path.resolve(__dirname, '../src');
 var theme = require('./theme');
 
@@ -63,10 +62,6 @@ module.exports = {
         new DashboardPlugin(dashboard.setData),
         new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(zh-cn)$/),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin({
-            '__ENV__': JSON.stringify(environment),
-            'process.env.NODE_ENV': JSON.stringify(environment)
-        })
     ],
     resolve: {
         extensions: ['.js', '.jsx'],

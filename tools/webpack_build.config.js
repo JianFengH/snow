@@ -1,7 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var environment = process.env.NODE_ENV || 'production';
 var srcPath = path.resolve(__dirname, '../src');
 var theme = require('./theme');
 
@@ -58,10 +57,6 @@ module.exports = {
     },
     plugins: [
         new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(zh-cn)$/),
-        new webpack.DefinePlugin({
-            '__ENV__': JSON.stringify(environment),
-            'process.env.NODE_ENV': JSON.stringify(environment)
-        }),
         new webpack.ProgressPlugin(function(percentage, msg) {
             var v = Math.round(percentage * 100);
             console.log('进度: ' + v + '%; ' + msg);
